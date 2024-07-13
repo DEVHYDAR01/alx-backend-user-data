@@ -33,7 +33,7 @@ class BasicAuth(Auth):
       # Return None if authorization_header is not a string
       if not isinstance(authorization_header, str):
           return
-      # Return None if authorization_header doesn’t start by Basic (with a space at the end)
+      # Return None if authorization_header doesn’t start by Basic (with a space at the end)  # noqa
       if not authorization_header.startswith('Basic '):
           return
       # Otherwise, return the value after Basic (after the space)
@@ -43,7 +43,7 @@ class BasicAuth(Auth):
 
     def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:  # noqa
         """
-        returns the decoded value of a Base64 string base64_authorization_header
+        returns the decoded value of a Base64 string base64_authorization_header  # noqa
 
         QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
@@ -64,7 +64,7 @@ class BasicAuth(Auth):
             return
         return decoded_base64
 
-    def extract_user_credentials(self, decoded_base64_authorization_header: str) -> Optional[tuple[str, str]]:
+    def extract_user_credentials(self, decoded_base64_authorization_header: str) -> Optional[tuple[str, str]]:  # noqa
         """
         returns the user email and password from the Base64 decoded value.
 
@@ -76,19 +76,15 @@ class BasicAuth(Auth):
         # Return (None, None) if decoded_base64_authorization_header is None
         if not decoded_base64_authorization_header:
             return None, None
-        # Return (None, None )if decoded_base64_authorization_header is not a string
-        if not isinstance(decoded_base64_authorization_header, str):
+        # Return (None, None )if decoded_base64_authorization_header is not a string  # noqa
+        if not isinstance(decoded_base64_authorization_header, str):  # noqa
             return None, None
-        # Return (None, None) if decoded_base64_authorization_header doesn’t contain ':'
+        
         if ":" not in decoded_base64_authorization_header:
             return None, None
-        # Otherwise, return the user email and the user password - these 2 values must be
-        #  separated by a :
-        # You can assume decoded_base64_authorization_header will contain only one :
-        # for now, cos a password could contain special character like a colon
         user, pwd = decoded_base64_authorization_header.split(':', maxsplit=1)
         return user, pwd
-    
+
     def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):  # noqa
         """
         Returns the User instance based on his email and password.
@@ -102,8 +98,8 @@ class BasicAuth(Auth):
         # Return None if user_pwd is None or not a string
         if not user_pwd or not isinstance(user_pwd, str):
             return
-        # Return None if your database (file) doesn’t contain any User instance with email
-        # equal to user_email - you should use the class method search of the User to lookup the
+        # Return None if your database (file) doesn’t contain any User instance with email  # noqa
+        # equal to user_email - you should use the class method search of the User to lookup the  # noqa
         # list of users based on their email. Don’t forget to test all cases:
         # “what if there is no user in DB?”, etc.
         try:
@@ -113,7 +109,7 @@ class BasicAuth(Auth):
         except Exception:
             return
 
-        # Return None if user_pwd is not the password of the User instance found
+        # Return None if user_pwd is not the password of the User instance found  # noqa
         # - you must use the method is_valid_password of User
         if not users:
             return

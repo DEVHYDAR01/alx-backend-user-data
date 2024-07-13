@@ -6,7 +6,6 @@ from flask import request
 from typing import List, TypeVar
 
 
-
 class Auth:
     """
     manage the API authentication
@@ -36,11 +35,8 @@ class Auth:
         # Returns False if path is in excluded_paths
         if path in excluded_paths:
             return False
-        # You can assume excluded_paths contains string path always ending by a /
         return False
-        
-                
-    
+
     def authorization_header(self, request=None) -> None:
         """
         Checks for authorization header in request
@@ -52,12 +48,12 @@ class Auth:
         if request is None or key not in request.headers:
             return
         return request.headers.get(key)
-    
-    # def current_user(self, request=None) -> None:
-    #     """
-    #     Only Returns None
-    #     """
-    #     return
+
+    def current_user(self, request=None) -> None:
+        """
+        Only Returns None
+        """
+        return
 
 
 if __name__ == '__main__':
@@ -69,4 +65,4 @@ if __name__ == '__main__':
     print(a.require_auth("/api/v1/status/", ["/api/v1/status/"]))  # False
     print(a.require_auth("/api/v1/status", ["/api/v1/status/"]))  # False
     print(a.require_auth("/api/v1/users", ["/api/v1/status/"]))  # True
-    print(a.require_auth("/api/v1/users", ["/api/v1/status/", "/api/v1/stats"]))  # True
+    print(a.require_auth("/api/v1/users", ["/api/v1/status/", "/api/v1/stats"]))  # noqa
