@@ -41,17 +41,17 @@ class Auth:
         
                 
     
-    # def authorization_header(self, request=None) -> None:
-    #     """
-    #     Checks for authorization header in request
+    def authorization_header(self, request=None) -> None:
+        """
+        Checks for authorization header in request
 
-    #     'Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='
-    #     """
-    #     key = 'Authorization'
+        'Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='
+        """
+        key = 'Authorization'
 
-    #     if request is None or key not in request.headers:
-    #         return
-    #     return request.headers.get(key)
+        if request is None or key not in request.headers:
+            return
+        return request.headers.get(key)
     
     # def current_user(self, request=None) -> None:
     #     """
